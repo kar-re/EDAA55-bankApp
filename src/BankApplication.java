@@ -10,6 +10,8 @@ public class BankApplication {
 	}
 
 	public void runApplication() {
+		int nbr;
+		
 		int input = scan.nextInt();
 		System.out.println("Val: " + input);
 		
@@ -17,18 +19,29 @@ public class BankApplication {
 		case 1:
 		case 2:
 		case 3:
+			
 			System.out.println("Från konto: ");
-			int nbr = scan.nextInt();
+			 nbr = scan.nextInt();		
 			System.out.println("Belopp: ");
-			double deposit = scan.nextDouble(); //inte klart :)
+			double dep = scan.nextDouble(); //inte klart :)
+			bank.findByNumber(nbr).deposit(dep);
 			
 			
 		case 4:
+			
+			System.out.println("Från konto: ");
+			 nbr = scan.nextInt();		
+			System.out.println("Belopp: ");
+			double wit = scan.nextDouble(); //inte klart :)
+			bank.findByNumber(nbr).withdraw(wit);
+			
 		case 5:
 		case 6: 
+			
 			String name = scan.nextLine();
 			long idNr = scan.nextLong();
 			bank.addAccount(name, idNr);
+			
 		case 7:
 		case 8: 
 		case 9:
