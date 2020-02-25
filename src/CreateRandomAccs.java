@@ -5,7 +5,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class CreateRandomAccs {
-	ArrayList<String> firstName, lastName, id, names;
+	ArrayList<String> firstName, lastName, names;
+	ArrayList<Integer> id;
 	ArrayList<BankAccount> accounts;
 	Random rand;
 	int amount;
@@ -14,23 +15,37 @@ public class CreateRandomAccs {
 	 * Skapar slumpmässiga konton med slumpmässiga namn Accounts hänvisar till
 	 * listan som överskrivs med de nya kontona.
 	 */
-	public CreateRandomAccs(ArrayList<BankAccount> accounts) {
+	public CreateRandomAccs(int amount, String filename) {
 		names = new ArrayList<String>();
-		id = new ArrayList<String>();
+		id = new ArrayList<Integer>();
 		rand = new Random();
-		this.accounts = accounts;
+		createAccounts(filename, amount);
+		
 	}
 
+	ArrayList<String> getNames() {
+		return names;
+	}
+	ArrayList<Integer> getYears() {
+		return id;
+	}
+	
 	public void createAccounts(String filename, int amount) {
 		this.amount = amount; 
 		readFile(filename);
 		for (int i = 0; i < amount; i++) {
 			String name = names.get(rand.nextInt(names.size()));
-			
-			BankAccount acc = new BankAccount(name, generateBirthDay());
-			accounts.add(acc);
+			names.add(name);
+			id.add(generateBirthDay());
 		}
 	}
+	
+	/*
+	 * public void createAccounts(String filename, int amount) { this.amount =
+	 * amount; readFile(filename); for (int i = 0; i < amount; i++) { String name =
+	 * names.get(rand.nextInt(names.size())); BankAccount acc = new
+	 * BankAccount(name, generateBirthDay()); accounts.add(acc); } }
+	 */
 	
 	private int generateBirthDay() {
 		String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
@@ -65,7 +80,7 @@ public class CreateRandomAccs {
 				lastName.add(lName);				
 			}
 			for (int i = 0; i < amount; i++) {
-				names.add(firstName.get(rand.nextInt(firstName.size())) + ' ' + lastName.get(rand.nextInt(lastName.size())));
+				names.add(firstName.get(rand.nextInt(firstName.size())) + " " + lastName.get(rand.nextInt(lastName.size())));
 			}
 			
 

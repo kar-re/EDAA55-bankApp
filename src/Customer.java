@@ -1,10 +1,8 @@
-import java.util.Random;
 
 public class Customer {
 	private String name;
 	private long idNr;
 	private int customerNr;
-	private Random rand;
 
 	/**
 	 * Skapar en kund (kontoinnehavare) med namnet ’name’ och id-nummer ’idNr’.
@@ -13,8 +11,7 @@ public class Customer {
 	Customer(String name, long idNr) {
 		this.name = name;
 		this.idNr = idNr;
-		rand = new Random();
-		customerNr = rand.nextInt(99999999);
+		customerNr = Bank.getNextCustNbr();
 	}
 
 	/** Tar reda på kundens namn. */
@@ -34,7 +31,7 @@ public class Customer {
 
 	/** Returnerar en strängbeskrivning av kunden. */
 	public String toString() {
-		String output = name + "," + " id: " + idNr + "," + " kundnr: " + customerNr;
+		String output = name + "," + " personnummer: " + idNr + "," + " kundnr: " + customerNr;
 		return output;
 	}
 }
