@@ -88,7 +88,7 @@ public class Bank {
 	ArrayList<Customer> findByPartofName(String namePart){
 		ArrayList<Customer> customersNameEquals = new ArrayList<Customer>();
 		for (Customer customer : customers) {
-			if (customer.getName().contains(namePart)){
+			if (customer.getName().contains(namePart)){ //här måste vi göra case insensitive. equalsIgnoreCase?
 				customersNameEquals.add(customer);
 			}
 		}
