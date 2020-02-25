@@ -14,7 +14,7 @@ public class BankAccount {
 	BankAccount(String holderName, long holderId) {
 		holder = new Customer(holderName, holderId);
 		rand = new Random();
-		accountNumber = rand.nextInt(9999);
+		accountNumber = rand.nextInt(99999999);
 		balance = 0;
 	}
 	/**
@@ -24,7 +24,8 @@ public class BankAccount {
 	BankAccount(Customer holder) {
 		this.holder = holder;
 		rand = new Random();
-		accountNumber = rand.nextInt(9999);
+		balance = 0;
+		accountNumber = rand.nextInt(99999999);
 	}
 	/** Tar reda på kontots innehavare. */
 	Customer getHolder() {

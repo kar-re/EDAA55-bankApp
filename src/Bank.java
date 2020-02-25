@@ -14,8 +14,24 @@ public class Bank {
 	* den befintliga användas. Det nya kontonumret returneras.
 	*/
 	int addAccount(String holderName, long idNr) {
-		BankAccount newAccount = new BankAccount(holderName, idNr);
-		accounts.add(newAccount);
+		BankAccount newAccount;
+		boolean alreadyExists = false;
+		int index = 0;
+		for (Customer cust : customers) {
+			if (cust.getName() == holderName) 
+				alreadyExists = true;
+				index
+		}
+		if (alreadyExists) {
+			newAccount = new BankAccount(holderName, );
+			accounts.add(newAccount);
+		} else {
+			Customer newCustomer = new Customer(holderName, idNr);
+			newAccount = new BankAccount(holderName, idNr);
+			accounts.add(newAccount);
+			customers.add(newCustomer);
+			
+		}
 		return accounts.get(accounts.indexOf(newAccount)).getAccountNumber();
 	}
 	/**
@@ -91,4 +107,5 @@ public class Bank {
 		}
 		return customersNameEquals;
 	}
+
 }

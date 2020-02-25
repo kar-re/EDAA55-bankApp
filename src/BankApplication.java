@@ -1,20 +1,23 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class BankApplication {
 	static Scanner scan = new Scanner(System.in);
-	static Bank bank = new Bank();
+	private static Bank bank = new Bank();
 	private static boolean bool = true;
 	private static boolean boolb = true;
 
 	public static void main(String[] args) {
+		CreateRandomAccs randomaccs = new CreateRandomAccs(bank.getAllAccounts());
+		randomaccs.createAccounts("namn.txt", 10);
 		BankApplication b = new BankApplication();
 		while (boolb) {
-			delay(2000);
 			bool = true;
 			while (bool) {
 				b.writeMenu();
 				b.runApplication();							
 			}
+			delay(2000);
 		}
 
 	}
@@ -50,11 +53,14 @@ public class BankApplication {
 				break;
 			case 3: // sätt in pengar
 
-				System.out.println("Från konto: ");
+				System.out.println("Till konto: ");
 				nbr = scan.nextInt();
 				System.out.println("Belopp: ");
 				double dep = scan.nextDouble();
-				bank.findByNumber(nbr).deposit(dep);
+				BankAccount acc = bank.findByNumber(nbr);
+				if (acc != null) {
+					acc.deposit(dep);				
+				}
 				break;
 			case 4: // ta ut pengar
 
@@ -103,8 +109,14 @@ public class BankApplication {
 				}
 				break;
 			case 8: // skriv ut alla konton
-
-				System.out.println(bank.getAllAccounts());
+				ArrayList<BankAccount> accounts, sortedAccounts;
+				accounts = bank.getAllAccounts();
+				nbr = 1000;
+				for (BankAccount account : accounts) {
+					
+					System.out.println("Kontonr: " + (1000+accounts.indexOf(account)) + " " + account.toString());
+					nbr += 1;
+				}
 				break;
 			case 9: // avsluta
 				boolb = false;

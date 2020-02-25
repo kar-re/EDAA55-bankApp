@@ -1,0 +1,7 @@
+Stefan Löfven
+Göran Persson
+Fredrik Reinfeldt
+Ingvar Carlsson
+Carl Bildt
+Olof Palme
+Thorbjörn Fälldin
