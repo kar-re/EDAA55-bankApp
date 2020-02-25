@@ -79,7 +79,6 @@ public class Bank {
 	* Listan är sorterad på kontoinnehavarnas namn.
 	*/
 	public ArrayList<BankAccount> getAllAccounts() {
-		
 		return accounts;
 	}
 	/**
@@ -122,16 +121,4 @@ public class Bank {
 		}
 		return customersNameEquals;
 	}
-	
-	public ArrayList<Customer> sortList(){
-		ArrayList<Customer> sortedByName = new ArrayList<Customer>();
-		for(int i = 0; i< customers.size() ; i++) {
-			for(int j = i+1; j < customers.size(); j++) {
-				if (customers.get[i].getName() > )
-			}
-		}
-		
-		return sortedByName;
-	}
-
 }
