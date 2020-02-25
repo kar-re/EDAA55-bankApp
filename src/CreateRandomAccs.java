@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CreateRandomAccs {
-	ArrayList<String> firstName, lastName, id;
+	ArrayList<String> firstName, lastName, id, names;
 	ArrayList<Customer> customers;
+	ArrayList<BankAccount> accounts;
 
-	public CreateRandomAccs(int amount, ArrayList<customer>,) {
-		name = new ArrayList<String>();
+	public CreateRandomAccs(int amount) {
+		names = new ArrayList<String>();
 		id = new ArrayList<String>();
 
 	}
@@ -16,8 +17,8 @@ public class CreateRandomAccs {
 	public ArrayList<Customer> createCustomers() {
 		return customers;
 	}
-	public ArrayList<BankAccounts> createAccounts() {
-		return customers;
+	public ArrayList<BankAccount> createAccounts() {
+		return accounts;
 	}
 
 	private void readFile(String fileName) {

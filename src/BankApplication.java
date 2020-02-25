@@ -1,15 +1,16 @@
 import java.util.Scanner;
 
 public class BankApplication {
-	Scanner scan = new Scanner(System.in);
-	Bank bank = new Bank();
+	static Scanner scan = new Scanner(System.in);
+	static Bank bank = new Bank();
 
 	public static void main(String[] args) {
-	
+	runApplication();
 
 	}
 
-	public void runApplication() {
+	private static void runApplication() {
+		writeMenu();
 		int input = scan.nextInt();
 		System.out.println("Val: " + input);
 		
@@ -26,9 +27,13 @@ public class BankApplication {
 		case 4:
 		case 5:
 		case 6: 
+			//System.out.println("Skriv in namnet för kontot:");
+			System.out.println("namn: ");
 			String name = scan.nextLine();
+			System.out.println("personnummer: ");			
 			long idNr = scan.nextLong();
-			bank.addAccount(name, idNr);
+			//int ddd bank.addAccount(name, idNr);
+			System.out.println("Nytt bankkonto med id: " + " skapat.");
 		case 7:
 		case 8: 
 		case 9:
@@ -41,7 +46,7 @@ public class BankApplication {
 
 	}
 
-	public void writeMenu() {
+	private static void writeMenu() {
 
 		System.out.println("1. Hitta konto utifrån innehavare");
 		System.out.println("2. Sök kontoinnehavare utifrån (del av) namn");
