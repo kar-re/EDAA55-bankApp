@@ -8,8 +8,12 @@ public class BankApplication {
 	private static boolean boolb = true;
 
 	public static void main(String[] args) {
-		CreateRandomAccs randomaccs = new CreateRandomAccs(bank.getAllAccounts());
-		randomaccs.createAccounts("namn.txt", 10);
+
+		CreateRandomAccs randomaccs = new CreateRandomAccs(10, "namn.txt");
+		for (int i = 0; i < randomaccs.getYears().size(); i++) {
+			bank.addAccount(randomaccs.getNames().get(i), randomaccs.getYears().get(i));
+		}
+		
 		BankApplication b = new BankApplication();
 		while (boolb) {
 			bool = true;
@@ -113,8 +117,7 @@ public class BankApplication {
 				accounts = bank.getAllAccounts();
 				nbr = 1000;
 				for (BankAccount account : accounts) {
-					
-					System.out.println("Kontonr: " + (1000+accounts.indexOf(account)) + " " + account.toString());
+					System.out.println("konto: " + account.getAccountNumber() + " " + account.toString());
 					nbr += 1;
 				}
 				break;

@@ -3,10 +3,13 @@ import java.util.ArrayList;
 public class Bank {
 	private ArrayList<BankAccount> accounts;
 	private ArrayList<Customer> customers;
+	static private int accNbr, custNbr;
 	/** Skapar en ny bank utan konton. */
 	Bank() {
 		accounts = new ArrayList<BankAccount>();
 		customers = new ArrayList<Customer>();
+		accNbr = 1000;
+		custNbr = 100;
 	}
 	/**
 	* Öppna ett nytt konto i banken. Om det redan finns en kontoinnehavare
@@ -17,22 +20,27 @@ public class Bank {
 		BankAccount newAccount;
 		boolean alreadyExists = false;
 		int index = 0;
+		
 		for (Customer cust : customers) {
 			if (cust.getName() == holderName) 
 				alreadyExists = true;
-				//index
+				index = customers.indexOf(cust);
 		}
+		
 		if (alreadyExists) {
-			newAccount = new BankAccount(holderName, idNr );
+			newAccount = new BankAccount(customers.get(index));
 			accounts.add(newAccount);
 		} else {
 			Customer newCustomer = new Customer(holderName, idNr);
-			newAccount = new BankAccount(holderName, idNr);
+			newAccount = new BankAccount(newCustomer);
 			accounts.add(newAccount);
 			customers.add(newCustomer);
+			custNbr += 1;
 			
 		}
-		return accounts.get(accounts.indexOf(newAccount)).getAccountNumber();
+		accNbr += 1;
+		return accNbr;
+		
 	}
 	/**
 	* Returnerar den kontoinnehavaren som har det givna id-numret,
@@ -46,6 +54,12 @@ public class Bank {
 	}
 	private boolean hasSameId(Customer customer, long idNr) {
 		return (customer.getIdNr() == idNr);
+	}
+	public static int getNextAccountNbr() {
+		return accNbr + 1;
+	}
+	public static int getNextCustNbr() {
+		return custNbr + 1;
 	}
 	/**
 	* Tar bort konto med nummer ’number’ från banken. Returnerar true om
@@ -102,7 +116,7 @@ public class Bank {
 	public ArrayList<Customer> findByPartofName(String namePart){
 		ArrayList<Customer> customersNameEquals = new ArrayList<Customer>();
 		for (Customer customer : customers) {
-			if (customer.getName().contains(namePart)){ //här måste vi göra case insensitive. equalsIgnoreCase?
+			if (customer.getName().toLowerCase().contains(namePart.toLowerCase())){
 				customersNameEquals.add(customer);
 			}
 		}
