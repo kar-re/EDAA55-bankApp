@@ -1,8 +1,6 @@
 import java.util.Random;
 
 public class BankAccount {
-	private String holderName;
-	private long holderId;
 	private int accountNumber;
 	private double balance;
 	private Customer holder;

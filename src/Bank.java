@@ -25,9 +25,6 @@ public class Bank {
 	Customer findHolder(long idNr) {
 		for (Customer t : customers) {
 			return hasSameId(t, idNr) ? t : null;
-//			 if(hasSameId(t, idNr)) {
-//				 return t;
-//			 } 
 		} return null;
 		
 	}

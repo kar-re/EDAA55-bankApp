@@ -3,21 +3,28 @@ import java.util.Scanner;
 public class BankApplication {
 	static Scanner scan = new Scanner(System.in);
 	static Bank bank = new Bank();
+	private static boolean bool = true;
+	private static boolean boolb = true;
 
 	public static void main(String[] args) {
 		BankApplication b = new BankApplication();
-		b.writeMenu();
-		b.runApplication();
+		while (boolb) {
+			delay(2000);
+			bool = true;
+			while (bool) {
+				b.writeMenu();
+				b.runApplication();							
+			}
+		}
 
 	}
 
 	public void runApplication() {
 		int nbr;
 		int input;
-		boolean b = true;
 
-		while (b) {
 			input = scan.nextInt();
+			scan.nextLine();
 			System.out.println("Val: " + input);
 
 			switch (input) {
@@ -30,6 +37,7 @@ public class BankApplication {
 				} else {
 					System.out.println("Följande konton finns för kunden: " + bank.findAccountsForHolder(nbr));
 				}
+			break;
 			case 2: // sök kontoinnehavare efter (del av) namn
 				System.out.println("Söker konton för namn:");
 				String namePart = scan.nextLine();
@@ -39,7 +47,7 @@ public class BankApplication {
 				} else {
 					System.out.println("Konton: " + bank.findByPartofName(namePart));
 				}
-
+				break;
 			case 3: // sätt in pengar
 
 				System.out.println("Från konto: ");
@@ -47,7 +55,7 @@ public class BankApplication {
 				System.out.println("Belopp: ");
 				double dep = scan.nextDouble();
 				bank.findByNumber(nbr).deposit(dep);
-
+				break;
 			case 4: // ta ut pengar
 
 				System.out.println("Från konto: ");
@@ -61,7 +69,7 @@ public class BankApplication {
 				} else {
 					bank.findByNumber(nbr).withdraw(wit);
 				}
-
+				break;
 			case 5: // överföring
 				System.out.println("Från konto: ");
 				int nbr1 = scan.nextInt();
@@ -77,15 +85,14 @@ public class BankApplication {
 					bank.findByNumber(nbr1).withdraw(amount);
 					bank.findByNumber(nbr2).deposit(amount);
 				}
-
+				break;
 			case 6: // skapa nytt konto
-				System.out.println("Namn på kontoinnehavare: ");
+				System.out.print("Namn på kontoinnehavare: ");
 				String name = scan.nextLine();
-				System.out.println("Personnummer: ");
+				System.out.print("Personnummer: ");
 				long idNr = scan.nextLong();
-				System.out.println("Konto skapat. Kundnummer: " + bank.addAccount(name, idNr)); // ska det finnas några
-																								// conditions här?
-
+				System.out.println("Konto skapat. Kundnummer: " + bank.addAccount(name, idNr)); // ska det finnas några				
+				break;
 			case 7: // ta bort ett konto efter kundnummer
 				System.out.println("Vilket kundnummer ska tas bort? : ");
 				nbr = scan.nextInt();
@@ -94,24 +101,23 @@ public class BankApplication {
 				} else {
 					System.out.println("Inget konto för kundnumret kunde hittas.");
 				}
-
+				break;
 			case 8: // skriv ut alla konton
 
 				System.out.println(bank.getAllAccounts());
-
+				break;
 			case 9: // avsluta
-				b = false;
-
+				boolb = false;
+				break;
 			default:
 				System.out.println("Inget menyval med det numret. Testa något i listan istället!"); // default verkar
-																									// inte funka.
-
-			}
+				break;																					// inte funka.
 		}
+		bool = false;
 
 	}
 
-	private static void writeMenu() {
+	private void writeMenu() {
 
 		System.out.println("1. Hitta konto utifrån innehavare");
 		System.out.println("2. Sök kontoinnehavare utifrån (del av) namn");
@@ -123,5 +129,13 @@ public class BankApplication {
 		System.out.println("8. Skriv ut konton");
 		System.out.println("9. Avsluta");
 
+	}
+	
+	static void delay(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
 	}
 }
