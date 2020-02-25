@@ -45,6 +45,7 @@ public class BankApplication {
 		System.out.println("Val: " + input);
 
 		switch (input) {
+
 		case 1: // sök konto utifrån innehavare (antar idNr?)
 			System.out.println("Söker konton för nummer: ");
 			nbr = scan.nextInt();
@@ -56,6 +57,7 @@ public class BankApplication {
 			}
 
 			break;
+
 		case 2: // sök kontoinnehavare efter (del av) namn
 			System.out.println("Söker konton för namn:");
 			String namePart = scan.nextLine();
@@ -63,9 +65,11 @@ public class BankApplication {
 				System.out.println("Personen har inget konto.");
 
 			} else {
+			
 				System.out.println("Konton: " + bank.findByPartofName(namePart));
 			}
 			break;
+
 		case 3: // sätt in pengar
 
 			System.out.println("Till konto: ");
@@ -75,8 +79,11 @@ public class BankApplication {
 			BankAccount acc = bank.findByNumber(nbr);
 			if (acc != null) {
 				acc.deposit(dep);
+				System.out.println("Saldo för konto " + nbr + ": " + bank.findByNumber(nbr).getAmount() + " kr");
 			}
+
 			break;
+
 		case 4: // ta ut pengar
 
 			System.out.println("Från konto: ");
@@ -89,8 +96,11 @@ public class BankApplication {
 
 			} else {
 				bank.findByNumber(nbr).withdraw(wit);
+				System.out.println(
+						"Saldo för konto " + nbr + " efter uttag: " + bank.findByNumber(nbr).getAmount() + " kr");
 			}
 			break;
+
 		case 5: // överföring
 			System.out.println("Från konto: ");
 			int nbr1 = scan.nextInt();
@@ -105,6 +115,9 @@ public class BankApplication {
 			} else {
 				bank.findByNumber(nbr1).withdraw(amount);
 				bank.findByNumber(nbr2).deposit(amount);
+				System.out.println(
+						"Överföring lyckad. Saldo för konto " + nbr1 + ": " + bank.findByNumber(nbr1).getAmount()
+								+ "kr , saldo för konto " + nbr2 + ": " + bank.findByNumber(nbr2).getAmount() + " kr");
 			}
 			break;
 		case 6: // skapa nytt konto
@@ -112,10 +125,11 @@ public class BankApplication {
 			String name = scan.nextLine();
 			System.out.print("Personnummer: ");
 			long idNr = scan.nextLong();
-			System.out.println("Konto skapat. Kundnummer: " + bank.addAccount(name, idNr)); // ska det finnas några
+			System.out.println("Konto skapat. Kundnummer: " + bank.addAccount(name, idNr));
 			break;
+
 		case 7: // ta bort ett konto efter kundnummer
-			System.out.println("Vilket kundnummer ska tas bort? : ");
+			System.out.println("Vilket kundnummer ska tas bort? ");
 			nbr = scan.nextInt();
 			if (bank.removeAccount(nbr)) {
 				System.out.println("Kontot har tagits bort.");
@@ -123,6 +137,7 @@ public class BankApplication {
 				System.out.println("Inget konto för kundnumret kunde hittas.");
 			}
 			break;
+
 		case 8: // skriv ut alla konton
 			ArrayList<BankAccount> accounts;
 			accounts = sortList(bank.getAllAccounts());
@@ -130,8 +145,10 @@ public class BankApplication {
 				System.out.println("konto: " + account.getAccountNumber() + " " + account.toString());
 			}
 			break;
+
 		case 9: // avsluta
 			boolb = false;
+			System.out.println("Session avslutas...");
 			break;
 		default:
 			System.out.println("Inget menyval med det numret. Testa något i listan istället!");
@@ -142,10 +159,7 @@ public class BankApplication {
 	}
 
 	public ArrayList<BankAccount> sortList(ArrayList<BankAccount> list) {
-		ArrayList<Customer> sortedByName = new ArrayList<Customer>();
 		ArrayList<BankAccount> sortedAcc = new ArrayList<BankAccount>(list);
-
-		Customer tempCust;
 		BankAccount tempAcc;
 
 		for (int i = 0; i < list.size() - 1; i++) {

@@ -40,14 +40,14 @@ public class BankAccount {
 	}
 	/** Sätter in beloppet ’amount’ på kontot. */
 	public void deposit(double amount) {
-		balance =+ amount;
+		balance += amount;
 	}
 	/**
 	* Tar ut beloppet ’amount’ från kontot. Om kontot saknar täckning
 	* blir saldot negativt.
 	*/
 	public void withdraw(double amount) {
-		balance =- amount;
+		balance -= amount;
 	}
 	/** Returnerar en strängrepresentation av bankkontot. */
 	public String toString() {
