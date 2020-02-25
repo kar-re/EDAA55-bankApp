@@ -48,15 +48,14 @@ public class BankApplication {
 		case 1: // sök konto utifrån innehavare (antar idNr?)
 			System.out.println("Söker konton för nummer: ");
 			nbr = scan.nextInt();
-
 			if (bank.findAccountsForHolder(nbr) == null) {
 				System.out.println("Inget konto med det numret existerar.");
 
 			} else {
 				System.out.println("Följande konton finns för kunden: " + bank.findAccountsForHolder(nbr));
 			}
-			break;
 
+			break;
 		case 2: // sök kontoinnehavare efter (del av) namn
 			System.out.println("Söker konton för namn:");
 			String namePart = scan.nextLine();
@@ -77,7 +76,6 @@ public class BankApplication {
 			if (acc != null) {
 				acc.deposit(dep);
 			}
-			System.out.println("Nytt saldo: " + acc.getAmount());
 			break;
 		case 4: // ta ut pengar
 
@@ -86,13 +84,12 @@ public class BankApplication {
 			System.out.println("Belopp: ");
 			double wit = scan.nextDouble();
 			if (bank.findByNumber(nbr).getAmount() < wit) {
-				System.out
-						.println("Uttaget misslyckades. Endast " + bank.findByNumber(nbr).getAmount() + " på kontot!");
+				System.out.println(
+						"Uttaget misslyckades. Endast " + bank.findByNumber(nbr).getAmount() + " kr på kontot!");
 
 			} else {
 				bank.findByNumber(nbr).withdraw(wit);
 			}
-			System.out.println("Nytt saldo: " + bank.findByNumber(nbr).getAmount());
 			break;
 		case 5: // överföring
 			System.out.println("Från konto: ");
@@ -103,13 +100,12 @@ public class BankApplication {
 			double amount = scan.nextDouble();
 			if (bank.findByNumber(nbr1).getAmount() < amount) {
 				System.out.println(
-						"Överföringen misslyckades. Endast " + bank.findByNumber(nbr1).getAmount() + " på kontot!");
+						"Överföringen misslyckades. Endast " + bank.findByNumber(nbr1).getAmount() + " kr på kontot!");
 
 			} else {
 				bank.findByNumber(nbr1).withdraw(amount);
 				bank.findByNumber(nbr2).deposit(amount);
 			}
-			System.out.println("Nytt saldo: " + bank.findByNumber(nbr2).getAmount());
 			break;
 		case 6: // skapa nytt konto
 			System.out.print("Namn på kontoinnehavare: ");
@@ -128,28 +124,46 @@ public class BankApplication {
 			}
 			break;
 		case 8: // skriv ut alla konton
-			ArrayList<BankAccount> accounts, sortedAccounts;
-			accounts = bank.getAllAccounts();
-			nbr = 1000;
+			ArrayList<BankAccount> accounts;
+			accounts = sortList(bank.getAllAccounts());
 			for (BankAccount account : accounts) {
 				System.out.println("konto: " + account.getAccountNumber() + " " + account.toString());
-				nbr += 1;
 			}
 			break;
 		case 9: // avsluta
-			System.out.println("Sessionen avslutas...");
 			boolb = false;
 			break;
 		default:
-			System.out.println("Inget menyval med det numret. Testa något i listan istället!"); // default verkar
-			break; // inte funka.
+			System.out.println("Inget menyval med det numret. Testa något i listan istället!");
+			break;
 		}
 		bool = false;
 
 	}
 
+	public ArrayList<BankAccount> sortList(ArrayList<BankAccount> list) {
+		ArrayList<Customer> sortedByName = new ArrayList<Customer>();
+		ArrayList<BankAccount> sortedAcc = new ArrayList<BankAccount>(list);
+
+		Customer tempCust;
+		BankAccount tempAcc;
+
+		for (int i = 0; i < list.size() - 1; i++) {
+			for (int j = i + 1; j < list.size(); j++) {
+				if (sortedAcc.get(i).getHolder().getName().compareTo(sortedAcc.get(j).getHolder().getName()) > 0) {
+					tempAcc = sortedAcc.get(i);
+					sortedAcc.set(i, sortedAcc.get(j));
+					sortedAcc.set(j, tempAcc);
+
+				}
+			}
+		}
+		return sortedAcc;
+	}
+
 	private void writeMenu() {
 
+		System.out.println(" ");
 		System.out.println("1. Hitta konto utifrån innehavare");
 		System.out.println("2. Sök kontoinnehavare utifrån (del av) namn");
 		System.out.println("3. Sätt in");
@@ -159,6 +173,7 @@ public class BankApplication {
 		System.out.println("7. Ta bort konto");
 		System.out.println("8. Skriv ut konton");
 		System.out.println("9. Avsluta");
+		System.out.println(" ");
 
 	}
 

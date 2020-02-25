@@ -8,24 +8,24 @@ public class Customer {
 	 * Skapar en kund (kontoinnehavare) med namnet ’name’ och id-nummer ’idNr’.
 	 * Kunden tilldelas också ett unikt kundnummer.
 	 */
-	Customer(String name, long idNr) {
+	public Customer(String name, long idNr) {
 		this.name = name;
 		this.idNr = idNr;
 		customerNr = Bank.getNextCustNbr();
 	}
 
 	/** Tar reda på kundens namn. */
-	String getName() {
+	public String getName() {
 		return name;
 	}
 
 	/** Tar reda på kundens personnummer. */
-	long getIdNr() {
+	public long getIdNr() {
 		return idNr;
 	}
 
 	/** Tar reda på kundens kundnummer. */
-	int getCustomerNr() {
+	public int getCustomerNr() {
 		return customerNr;
 	}
 

@@ -16,7 +16,7 @@ public class Bank {
 	* med de givna uppgifterna ska inte en ny Customer skapas, utan istället
 	* den befintliga användas. Det nya kontonumret returneras.
 	*/
-	int addAccount(String holderName, long idNr) {
+	public int addAccount(String holderName, long idNr) {
 		BankAccount newAccount;
 		boolean alreadyExists = false;
 		int index = 0;
@@ -46,7 +46,7 @@ public class Bank {
 	* Returnerar den kontoinnehavaren som har det givna id-numret,
 	* eller null om ingen sådan finns.
 	*/
-	Customer findHolder(long idNr) {
+	public Customer findHolder(long idNr) {
 		for (Customer t : customers) {
 			return hasSameId(t, idNr) ? t : null;
 		} return null;
@@ -65,7 +65,7 @@ public class Bank {
 	* Tar bort konto med nummer ’number’ från banken. Returnerar true om
 	* kontot fanns (och kunde tas bort), annars false.
 	*/
-	boolean removeAccount(int number) {
+	public boolean removeAccount(int number) {
 		for (BankAccount account : accounts) {
 			if(account.getAccountNumber() == number) {
 				accounts.remove(account);
@@ -78,14 +78,14 @@ public class Bank {
 	* Returnerar en lista innehållande samtliga bankkonton i banken.
 	* Listan är sorterad på kontoinnehavarnas namn.
 	*/
-	ArrayList<BankAccount> getAllAccounts() {
+	public ArrayList<BankAccount> getAllAccounts() {
 		return accounts;
 	}
 	/**
 	* Söker upp och returnerar bankkontot med kontonummer ’accountNumber’.
 	* Returnerar null om inget sådant konto finns.
 	*/
-	BankAccount findByNumber(int accountNumber) {
+	public BankAccount findByNumber(int accountNumber) {
 		for (BankAccount account : accounts) {
 			if(account.getAccountNumber() == accountNumber) {
 				return account;
@@ -96,7 +96,7 @@ public class Bank {
 	* Söker upp alla bankkonton som innehas av kunden med id-nummer ’idNr’.
 	* Kontona returneras i en lista. Kunderna antas ha unika id-nummer.
 	*/
-	ArrayList<BankAccount> findAccountsForHolder(long idNr) {
+	public ArrayList<BankAccount> findAccountsForHolder(long idNr) {
 		ArrayList<BankAccount> holderAccounts = new ArrayList<BankAccount>();
 		for (BankAccount account : accounts) {
 			if (account.getHolder().getIdNr() == idNr) {
@@ -112,7 +112,7 @@ public class Bank {
 	* flera gånger i resultatet. Sökningen är "case insensitive", det vill
 	* säga gör ingen skillnad på stora och små bokstäver.
 	*/
-	ArrayList<Customer> findByPartofName(String namePart){
+	public ArrayList<Customer> findByPartofName(String namePart){
 		ArrayList<Customer> customersNameEquals = new ArrayList<Customer>();
 		for (Customer customer : customers) {
 			if (customer.getName().toLowerCase().contains(namePart.toLowerCase())){
@@ -121,5 +121,4 @@ public class Bank {
 		}
 		return customersNameEquals;
 	}
-
 }
