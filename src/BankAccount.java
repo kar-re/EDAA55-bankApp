@@ -11,7 +11,7 @@ public class BankAccount {
 	* id ’holderId’. Kontot tilldelas ett unikt kontonummer och innehåller
 	* inledningsvis 0 kr.
 	*/
-	BankAccount(String holderName, long holderId) {
+	public BankAccount(String holderName, long holderId) {
 		holder = new Customer(holderName, holderId);
 		rand = new Random();
 		accountNumber = rand.nextInt(99999999);
@@ -21,33 +21,33 @@ public class BankAccount {
 	* Skapar ett nytt bankkonto med innehavare ’holder’. Kontot tilldelas
 	* ett unikt kontonummer och innehåller inledningsvis 0 kr.
 	*/
-	BankAccount(Customer holder) {
+	public BankAccount(Customer holder) {
 		this.holder = holder;
 		rand = new Random();
 		balance = 0;
 		accountNumber = rand.nextInt(99999999);
 	}
 	/** Tar reda på kontots innehavare. */
-	Customer getHolder() {
+	public Customer getHolder() {
 		return holder;
 	}
 	/** Tar reda på det kontonummer som identifierar detta konto. */
-	int getAccountNumber() {
+	public int getAccountNumber() {
 		return accountNumber;
 	}
 	/** Tar reda på hur mycket pengar som finns på kontot. */
-	double getAmount() {
+	public double getAmount() {
 		return balance;
 	}
 	/** Sätter in beloppet ’amount’ på kontot. */
-	void deposit(double amount) {
+	public void deposit(double amount) {
 		balance =+ amount;
 	}
 	/**
 	* Tar ut beloppet ’amount’ från kontot. Om kontot saknar täckning
 	* blir saldot negativt.
 	*/
-	void withdraw(double amount) {
+	public void withdraw(double amount) {
 		balance =- amount;
 	}
 	/** Returnerar en strängrepresentation av bankkontot. */

@@ -70,7 +70,7 @@ public class BankApplication {
 				double wit = scan.nextDouble();
 				if (bank.findByNumber(nbr).getAmount() < wit) {
 					System.out.println(
-							"Uttaget misslyckades. Endast " + bank.findByNumber(nbr).getAmount() + " på kontot!");
+							"Uttaget misslyckades. Endast " + bank.findByNumber(nbr).getAmount() + " kr på kontot!");
 
 				} else {
 					bank.findByNumber(nbr).withdraw(wit);
@@ -85,7 +85,7 @@ public class BankApplication {
 				double amount = scan.nextDouble();
 				if (bank.findByNumber(nbr1).getAmount() < amount) {
 					System.out.println(
-							"Överföringen misslyckades. Endast " + bank.findByNumber(nbr1).getAmount() + " på kontot!");
+							"Överföringen misslyckades. Endast " + bank.findByNumber(nbr1).getAmount() + " kr på kontot!");
 
 				} else {
 					bank.findByNumber(nbr1).withdraw(amount);
@@ -122,15 +122,16 @@ public class BankApplication {
 				boolb = false;
 				break;
 			default:
-				System.out.println("Inget menyval med det numret. Testa något i listan istället!"); // default verkar
-				break;																					// inte funka.
+				System.out.println("Inget menyval med det numret. Testa något i listan istället!"); 
+				break;																				
 		}
 		bool = false;
 
 	}
 
 	private void writeMenu() {
-
+		
+		System.out.println(" ");
 		System.out.println("1. Hitta konto utifrån innehavare");
 		System.out.println("2. Sök kontoinnehavare utifrån (del av) namn");
 		System.out.println("3. Sätt in");
@@ -140,6 +141,7 @@ public class BankApplication {
 		System.out.println("7. Ta bort konto");
 		System.out.println("8. Skriv ut konton");
 		System.out.println("9. Avsluta");
+		System.out.println(" ");
 
 	}
 	
