@@ -22,9 +22,10 @@ public class Bank {
 		int index = 0;
 		
 		for (Customer cust : customers) {
-			if (cust.getName() == holderName) 
+			if (holderName.equalsIgnoreCase(cust.getName()) && idNr == cust.getIdNr()) {
 				alreadyExists = true;
 				index = customers.indexOf(cust);
+			}
 		}
 		
 		if (alreadyExists) {
