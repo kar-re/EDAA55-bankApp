@@ -179,7 +179,7 @@ public class BankApplication {
 				System.out.println("Det finns inga konton ännu");
 			} else {
 				for (BankAccount account : accounts) {
-					System.out.println("konto: " + account.getAccountNumber() + " " + account.toString());
+					System.out.println("konto: " + account.getAccountNumber() + " (" + account.toString() +")");
 				}
 
 			}
