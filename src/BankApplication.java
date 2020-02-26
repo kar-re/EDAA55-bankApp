@@ -47,6 +47,7 @@ public class BankApplication {
 		scan.nextLine();
 		System.out.println("Val: " + input);
 
+		
 		switch (input) {
 
 		case 1: // sök konto utifrån innehavare (antar idNr?)
@@ -152,10 +153,12 @@ public class BankApplication {
 			do {
 				if (scan.hasNextLong()) {
 					idNr = scan.nextLong();
+					fe = true;
 					
 				} else {
 					scan.nextLine();
 					System.out.println("Skriv in ett giltigt tal.");
+					
 				} 				
 			} while (!fe);
 			
