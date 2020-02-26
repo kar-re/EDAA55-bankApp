@@ -14,10 +14,10 @@ public class BankApplication {
 	 * Mainmetod som anropar meny-loopen.
 	 */
 	public static void main(String[] args) {
-//		CreateRandomAccs randomaccs = new CreateRandomAccs(10, "namn.txt");
-//		for (int i = 0; i < randomaccs.getYears().size(); i++) {
-//			bank.addAccount(randomaccs.getNames().get(i), randomaccs.getYears().get(i));
-//		}
+		CreateRandomAccs randomaccs = new CreateRandomAccs(10, "namn.txt");
+		for (int i = 0; i < randomaccs.getYears().size(); i++) {
+			bank.addAccount(randomaccs.getNames().get(i), randomaccs.getYears().get(i));
+		}
 
 		BankApplication b = new BankApplication();
 		while (boolb) {
@@ -182,7 +182,8 @@ public class BankApplication {
 				System.out.println("Det finns inga konton ännu");
 			} else {
 				for (BankAccount account : accounts) {
-					System.out.println("konto: " + account.getAccountNumber()+": " + account.toString());
+		System.out.println(account.toString());
+
 				}
 
 			}
