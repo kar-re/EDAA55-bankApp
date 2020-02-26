@@ -111,7 +111,18 @@ public class BankApplication {
 			System.out.print("Namn på kontoinnehavare: ");
 			String name = scan.nextLine();
 			System.out.print("Personnummer: ");
-			long idNr = scan.nextLong();
+			boolean fe = false;
+			long idNr = 0;
+			do {
+				if (scan.hasNextLong()) {
+					idNr = scan.nextLong();
+					
+				} else {
+					scan.nextLine();
+					System.out.println("Skriv in ett giltigt tal.");
+				} 				
+			} while (!fe);
+			
 			System.out.println("Konto skapat. Kundnummer: " + bank.addAccount(name, idNr)); // ska det finnas några
 			break;
 		case 7: // ta bort ett konto efter kundnummer

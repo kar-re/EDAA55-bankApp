@@ -4,7 +4,6 @@ public class BankAccount {
 	private int accountNumber;
 	private double balance;
 	private Customer holder;
-	private Random rand;
 	
 	/**
 	* Skapar ett nytt bankkonto åt en innehavare med namn ’holderName’ och
@@ -22,7 +21,6 @@ public class BankAccount {
 	*/
 	public BankAccount(Customer holder) {
 		this.holder = holder;
-		rand = new Random();
 		balance = 0;
 		accountNumber = Bank.getNextAccountNbr();
 	}
