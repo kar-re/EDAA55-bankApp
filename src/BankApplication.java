@@ -59,6 +59,10 @@ public class BankApplication {
 
 			} else {
 				System.out.println("Följande konton finns för kunden: " + bank.findAccountsForHolder((long) nbr));
+//				Object foundAccounts = ;
+//				for (Object t : foundAccounts) {
+//					t.toString();
+//				}
 			}
 
 			break;
