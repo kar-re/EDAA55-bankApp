@@ -55,6 +55,7 @@ public class CreateRandomAccs {
 		int year = rand.nextInt(100) + 1900;
 		String month = months[rand.nextInt(months.length)];
 		String day = days[rand.nextInt(days.length)];
+	
 		String dateOfBirth = "" + year + month + day;
 		return Integer.parseInt(dateOfBirth);
 	}
