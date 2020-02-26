@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class BankAccount {
 	private int accountNumber;
 	private double balance;
@@ -49,7 +47,7 @@ public class BankAccount {
 	}
 	/** Returnerar en strängrepresentation av bankkontot. */
 	public String toString() {
-		String output = holder.toString() + " : " + balance;
+		String output = "konto: " + this.getAccountNumber() + " " + holder.toString() + " : " + balance;
 		return output;
 	}
 
