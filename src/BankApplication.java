@@ -40,6 +40,9 @@ public class BankApplication {
 		int nbr;
 		int input;
 
+		 //hur fixa här så att vi _endast_ tar emot en int? alltså felmeddelande om string. gäller även olika cases
+		// en privat boolean-metod med try-catch?
+		
 		input = scan.nextInt();
 		scan.nextLine();
 		System.out.println("Val: " + input);
@@ -49,12 +52,12 @@ public class BankApplication {
 		case 1: // sök konto utifrån innehavare (antar idNr?)
 			System.out.println("Söker konton för personnummer: ");
 			nbr = scan.nextInt();
-			if (bank.findAccountsForHolder(nbr).size() == 0) { // här kraschar programmet när man söker på rätt
+			if (bank.findAccountsForHolder((long)nbr) == null) { // här kraschar programmet när man söker på rätt
 																// personnummer.
 				System.out.println("Inget konto existerar för personnumret " + nbr);
 
 			} else {
-				System.out.println("Följande konton finns för kunden: " + bank.findAccountsForHolder(nbr));
+				System.out.println("Följande konton finns för kunden: " + bank.findAccountsForHolder((long) nbr));
 			}
 
 			break;
@@ -209,6 +212,7 @@ public class BankApplication {
 		}
 		return b;
 	}
+	
 
 	private void writeMenu() {
 
