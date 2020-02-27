@@ -100,7 +100,7 @@ public class Bank {
 	public ArrayList<BankAccount> findAccountsForHolder(long idNr) {
 		ArrayList<BankAccount> holderAccounts = new ArrayList<BankAccount>();
 		for (BankAccount account : accounts) {
-			if (Long.toString(account.getHolder().getIdNr()).contains(Long.toString(idNr))) {
+			if (Long.toString(account.getHolder().getIdNr()).equals(Long.toString(idNr))) {
 				holderAccounts.add(account);
 			}
 		}
