@@ -236,30 +236,27 @@ public class BankApplication {
 			System.out.print("Namn på kontoinnehavare: ");
 			String name = "";
 			b = false;
-			while (!b) {
-				if (scan.hasNextInt()) {
+//			while (!b) {
+//				if (scan.hasNextInt()) {
+//					scan.nextLine();
+//					System.out.println("Skriv in ett giltigt namn");
+//				} else {
+//					namePart = scan.next();
+//					b = true;
+//				}
+//			}
+			while (scan.hasNextInt()) {
 					scan.nextLine();
 					System.out.println("Skriv in ett giltigt namn");
-				} else {
-					namePart = scan.nextLine();
-					b = true;
-				}
 			}
+			name = scan.next();
 			System.out.print("Personnummer: ");
-			boolean fe = false;
 			long idNr = 0;
-			do {
-				if (scan.hasNextLong()) {
-					idNr = scan.nextLong();
-					fe = true;
-
-				} else {
+				while (!scan.hasNextLong()) {
 					scan.nextLine();
 					System.out.println("Skriv in ett giltigt personnummer");
-
 				}
-			} while (!fe);
-
+			idNr = scan.nextLong();
 			System.out.println("Konto skapat. Kontonummer: " + bank.addAccount(name, idNr));
 			break;
 
