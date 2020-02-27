@@ -40,9 +40,7 @@ public class BankApplication {
 		int nbr;
 		int input = 0;
 
-		// hur fixa här så att vi _endast_ tar emot en int? alltså felmeddelande om
-		// string. gäller även olika cases
-		// en privat boolean-metod med try-catch?
+	
 		boolean b = false;
 		while (!b) {
 			if (scan.hasNextInt()) {
