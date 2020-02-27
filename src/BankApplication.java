@@ -40,17 +40,7 @@ public class BankApplication {
 		int nbr;
 		int input = 0;
 
-	
-		boolean b = false;
-		while (!b) {
-			if (scan.hasNextInt()) {
-				input = scan.nextInt();
-				b = true;
-			} else {
-				scan.nextLine();
-				System.out.println("Skriv in en giltigt siffra"); //felmeddelande skrivs ut dubbelt ibland
-			}
-		}
+		input = integerInput();
 
 		scan.nextLine();
 		System.out.println("Val: " + input);
@@ -59,26 +49,13 @@ public class BankApplication {
 
 		case 1: // sök konto utifrån innehavare (antar idNr?)
 			System.out.println("Söker konton för personnummer: ");
-			b = false;
 			nbr = 0;
-			while (!b) {
-				if (scan.hasNextInt()) {
-					nbr = scan.nextInt();
-					b = true;
-				} else {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt personnummer");
-				}
-			}
+			nbr = integerInput();
 
 			if (bank.findAccountsForHolder((long) nbr).isEmpty()) {
 				System.out.println("Inget konto existerar för personnumret " + nbr);
 			} else {
 				System.out.println("Följande konton finns för kunden: " + bank.findAccountsForHolder((long) nbr));
-//				Object foundAccounts = ;
-//				for (Object t : foundAccounts) {
-//					t.toString();
-//				}
 			}
 
 			break;
@@ -86,16 +63,7 @@ public class BankApplication {
 		case 2: // sök kontoinnehavare efter (del av) namn
 			System.out.println("Söker konton för namn:");
 			String namePart = "";
-			b = false;
-			while (!b) {
-				if (scan.hasNextInt()) {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt namn");
-				} else {
-					namePart = scan.nextLine();
-					b = true;
-				}
-			}
+			namePart = stringInput();
 
 			if (bank.findByPartofName(namePart) == null) {
 				System.out.println("Inget konto kunde hittas");
@@ -109,19 +77,10 @@ public class BankApplication {
 		case 3: // sätt in pengar
 
 			System.out.println("Sätt in pengar till konto: ");
-			b = false;
 			nbr = 0;
-			while (!b) {
-				if (scan.hasNextInt()) {
-					nbr = scan.nextInt();
-					b = true;
-				} else {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt kontonummer");
-				}
-			}
+			nbr = integerInput();
 			System.out.println("Belopp: ");
-			double dep = scan.nextDouble();
+			double dep = doubleInput();
 
 			while (dep <= 0) {
 				System.out.println("Du måste ange ett positivt belopp! Ange nytt belopp: ");
@@ -139,17 +98,8 @@ public class BankApplication {
 		case 4: // ta ut pengar
 
 			System.out.println("Ta ut pengar från konto: ");
-			b = false;
 			nbr = 0;
-			while (!b) {
-				if (scan.hasNextInt()) {
-					nbr = scan.nextInt();
-					b = true;
-				} else {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt kontonummer");
-				}
-			}
+			nbr = integerInput();
 			System.out.println("Belopp: ");
 			double wit = scan.nextDouble();
 			while (wit <= 0) {
@@ -175,43 +125,15 @@ public class BankApplication {
 			break;
 
 		case 5: // överföring
-			b=false;
 			double amount=0;
-			boolean b1 = false;
-			boolean b2 = false;
 			int nbr1 = 0;
 			int nbr2 = 0;
 			System.out.println("Från konto: ");
-			while (!b1) {
-				if (scan.hasNextInt()) {
-					nbr1 = scan.nextInt();
-					b1 = true;
-				} else {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt kontonummer");
-				}
-			}
+			nbr1 = integerInput();
 			System.out.println("Till konto: ");
-			while (!b2) {
-				if (scan.hasNextInt()) {
-					nbr2 = scan.nextInt();
-					b2 = true;
-				} else {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt kontonummer"); //felmeddelandet skrivs ut två gånger. 
-				}
-			}
+			nbr2 = integerInput();
 			System.out.println("Belopp att överföra: ");
-			
-			while(!b) {
-				if(scan.hasNextDouble()) {
-					amount = scan.nextDouble();
-					b=true;
-				} else {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt belopp");
-				}
-			} 
+			amount = doubleInput();
 
 			if (doesExist(nbr1) && doesExist(nbr2)) {
 				if (bank.findByNumber(nbr1).getAmount() < amount) {
@@ -233,44 +155,17 @@ public class BankApplication {
 		case 6: // skapa nytt konto
 			System.out.print("Namn på kontoinnehavare: ");
 			String name = "";
-			b = false;
-//			while (!b) {
-//				if (scan.hasNextInt()) {
-//					scan.nextLine();
-//					System.out.println("Skriv in ett giltigt namn");
-//				} else {
-//					namePart = scan.next();
-//					b = true;
-//				}
-//			}
-			while (scan.hasNextInt()) {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt namn");
-			}
-			name = scan.next();
+			
+			name = stringInput();
 			System.out.print("Personnummer: ");
-			long idNr = 0;
-				while (!scan.hasNextLong()) {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt personnummer");
-				}
-			idNr = scan.nextLong();
+			long idNr = longInput();
 			System.out.println("Konto skapat. Kontonummer: " + bank.addAccount(name, idNr));
 			break;
 
 		case 7: // ta bort ett konto efter kundnummer
 			System.out.println("Vilket kundnummer ska tas bort? ");
-			b=false;
 			nbr=0;
-			while (!b) {
-				if (scan.hasNextInt()) {
-					nbr = scan.nextInt();
-					b = true;
-				} else {
-					scan.nextLine();
-					System.out.println("Skriv in ett giltigt kontonummer"); //felmeddelandet skrivs ut två gånger. 
-				}
-			}
+			nbr = integerInput();
 			
 			if (bank.removeAccount(nbr)) {
 				System.out.println("Kontot har tagits bort.");
@@ -304,6 +199,38 @@ public class BankApplication {
 		}
 		bool = false;
 
+	}
+	
+	private int integerInput() {
+		while (!scan.hasNextInt()) {
+			scan.nextLine();
+			System.out.println("Skriv in ett giltigt nummer");
+		}
+		return scan.nextInt();
+	}
+	
+	private long longInput() {
+		while (!scan.hasNextLong()) {
+			scan.next();
+			System.out.println("Skriv in ett giltigt nummer");
+		}
+		return scan.nextLong();
+	}
+	
+	private double doubleInput() {
+		while (!scan.hasNextDouble()) {
+			System.out.println("Skriv in ett giltigt nummer");
+			scan.next();
+		}
+		return scan.nextDouble();
+	}
+	
+	private String stringInput() {
+		while (scan.hasNextInt() || scan.hasNextByte() || scan.hasNextLong() || scan.hasNextShort()) {
+			System.out.println("Skriv in en giltig sträng");
+			scan.nextLine();
+		}
+		return scan.nextLine();
 	}
 
 	public ArrayList<BankAccount> sortList(ArrayList<BankAccount> list) {

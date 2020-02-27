@@ -18,18 +18,9 @@ public class Bank {
 	*/
 	public int addAccount(String holderName, long idNr) {
 		BankAccount newAccount;
-		boolean alreadyExists = false;
-		int index = 0;
-		
-		for (Customer cust : customers) {
-			if (holderName.equalsIgnoreCase(cust.getName()) && idNr == cust.getIdNr()) {
-				alreadyExists = true;
-				index = customers.indexOf(cust);
-			}
-		}
-		
-		if (alreadyExists) {
-			newAccount = new BankAccount(customers.get(index));
+		Customer existingCust = findHolder(idNr);
+		if (existingCust != null && holderName.equalsIgnoreCase(existingCust.getName())) {
+			newAccount = new BankAccount(existingCust);
 			accounts.add(newAccount);
 		} else {
 			Customer newCustomer = new Customer(holderName, idNr);
@@ -37,8 +28,27 @@ public class Bank {
 			accounts.add(newAccount);
 			customers.add(newCustomer);
 			custNbr += 1;
-			
 		}
+		
+		
+//		for (Customer cust : customers) {
+//			if (holderName.equalsIgnoreCase(cust.getName()) && idNr == cust.getIdNr()) {
+//				alreadyExists = true;
+//				index = customers.indexOf(cust);
+//			}
+//		}
+//		
+//		if (alreadyExists) {
+//			newAccount = new BankAccount(customers.get(index));
+//			accounts.add(newAccount);
+//		} else {
+//			Customer newCustomer = new Customer(holderName, idNr);
+//			newAccount = new BankAccount(newCustomer);
+//			accounts.add(newAccount);
+//			customers.add(newCustomer);
+//			custNbr += 1;
+//			
+//		}
 		accNbr += 1;
 		return accNbr;
 		
