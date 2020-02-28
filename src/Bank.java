@@ -27,11 +27,11 @@ public class Bank {
 			newAccount = new BankAccount(newCustomer);
 			accounts.add(newAccount);
 			customers.add(newCustomer);
-			custNbr += 1;
+			custNbr++;
 		}
 		
-		accNbr += 1;
-		return accNbr;
+		accNbr++;
+		return accNbr - 1;
 		
 	}
 	/**
