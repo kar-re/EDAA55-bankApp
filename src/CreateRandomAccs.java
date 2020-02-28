@@ -22,6 +22,9 @@ public class CreateRandomAccs {
 		createAccounts(filename, amount);
 		
 	}
+	public int getAmount() {
+		return amount;
+	}
 
 	ArrayList<String> getNames() {
 		return names;

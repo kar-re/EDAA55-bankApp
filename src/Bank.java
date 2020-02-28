@@ -19,7 +19,7 @@ public class Bank {
 	public int addAccount(String holderName, long idNr) {
 		BankAccount newAccount;
 		Customer existingCust = findHolder(idNr);
-		if (existingCust != null && holderName.equalsIgnoreCase(existingCust.getName())) {
+		if (existingCust != null) {
 			newAccount = new BankAccount(existingCust);
 			accounts.add(newAccount);
 		} else {
@@ -30,25 +30,6 @@ public class Bank {
 			custNbr += 1;
 		}
 		
-		
-//		for (Customer cust : customers) {
-//			if (holderName.equalsIgnoreCase(cust.getName()) && idNr == cust.getIdNr()) {
-//				alreadyExists = true;
-//				index = customers.indexOf(cust);
-//			}
-//		}
-//		
-//		if (alreadyExists) {
-//			newAccount = new BankAccount(customers.get(index));
-//			accounts.add(newAccount);
-//		} else {
-//			Customer newCustomer = new Customer(holderName, idNr);
-//			newAccount = new BankAccount(newCustomer);
-//			accounts.add(newAccount);
-//			customers.add(newCustomer);
-//			custNbr += 1;
-//			
-//		}
 		accNbr += 1;
 		return accNbr;
 		
@@ -58,19 +39,23 @@ public class Bank {
 	* eller null om ingen sådan finns.
 	*/
 	public Customer findHolder(long idNr) {
-		for (Customer t : customers) {
-			return hasSameId(t, idNr) ? t : null;
-		} return null;
-		
+		Customer cust = null;
+			for (Customer t : customers) {
+				if (hasSameId(t, idNr)) {
+					cust = t;
+				}
+			} 
+			return cust;		
 	}
 	private boolean hasSameId(Customer customer, long idNr) {
-		return (customer.getIdNr() == idNr);
+		boolean hasSame = customer.getIdNr() == idNr;
+		return hasSame;
 	}
 	public static int getNextAccountNbr() {
-		return accNbr + 1;
+		return accNbr;
 	}
 	public static int getNextCustNbr() {
-		return custNbr + 1;
+		return custNbr;
 	}
 	/**
 	* Tar bort konto med nummer ’number’ från banken. Returnerar true om

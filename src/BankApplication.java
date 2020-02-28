@@ -15,7 +15,7 @@ public class BankApplication {
 	 */
 	public static void main(String[] args) {
 		CreateRandomAccs randomaccs = new CreateRandomAccs(10, "namn.txt");
-		for (int i = 0; i < randomaccs.getYears().size(); i++) {
+		for (int i = 0; i < randomaccs.getAmount(); i++) {
 			bank.addAccount(randomaccs.getNames().get(i), randomaccs.getYears().get(i));
 		}
 
@@ -47,12 +47,15 @@ public class BankApplication {
 
 		case 1: // sök konto utifrån innehavare (antar idNr?)
 			System.out.println("Söker konton för personnummer: ");
-			nbr = integerInput();
+			long longNbr = longInput();
 
-			if (bank.findAccountsForHolder((long) nbr).isEmpty()) {
-				System.out.println("Inget konto existerar för personnumret " + nbr);
+			if (bank.findAccountsForHolder(longNbr).isEmpty()) {
+				System.out.println("Inget konto existerar för personnumret " + longNbr);
 			} else {
-				System.out.println("Följande konton finns för kunden: " + bank.findAccountsForHolder((long) nbr));
+				System.out.println("Följande konton finns för kunden: ");
+				for (BankAccount accs : (ArrayList<BankAccount>) bank.findAccountsForHolder(longNbr)) {
+					System.out.println(accs.toString());
+				}
 			}
 
 			break;
