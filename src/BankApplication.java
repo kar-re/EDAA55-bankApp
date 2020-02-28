@@ -38,9 +38,7 @@ public class BankApplication {
 	 */
 	public void runApplication() {
 		int nbr;
-		int input = 0;
-
-		input = integerInput();
+		int input = integerInput();
 
 		scan.nextLine();
 		System.out.println("Val: " + input);
@@ -49,7 +47,6 @@ public class BankApplication {
 
 		case 1: // sök konto utifrån innehavare (antar idNr?)
 			System.out.println("Söker konton för personnummer: ");
-			nbr = 0;
 			nbr = integerInput();
 
 			if (bank.findAccountsForHolder((long) nbr).isEmpty()) {
@@ -62,22 +59,23 @@ public class BankApplication {
 
 		case 2: // sök kontoinnehavare efter (del av) namn
 			System.out.println("Söker konton för namn:");
-			String namePart = "";
-			namePart = stringInput();
+			String namePart = stringInput();
 
 			if (bank.findByPartofName(namePart) == null) {
 				System.out.println("Inget konto kunde hittas");
 
 			} else {
 
-				System.out.println("Konton: " + bank.findByPartofName(namePart));
+				System.out.println("Konton: ");
+				for (Customer cust : (ArrayList<Customer>) bank.findByPartofName(namePart)) {
+					System.out.println(cust.toString());
+				}
 			}
 			break;
 
 		case 3: // sätt in pengar
 
 			System.out.println("Sätt in pengar till konto: ");
-			nbr = 0;
 			nbr = integerInput();
 			System.out.println("Belopp: ");
 			double dep = doubleInput();
@@ -98,13 +96,12 @@ public class BankApplication {
 		case 4: // ta ut pengar
 
 			System.out.println("Ta ut pengar från konto: ");
-			nbr = 0;
 			nbr = integerInput();
 			System.out.println("Belopp: ");
-			double wit = scan.nextDouble();
+			double wit = doubleInput();
 			while (wit <= 0) {
 				System.out.println("Du måste ange ett positivt belopp! Ange nytt belopp: ");
-				wit = scan.nextDouble();
+				wit = doubleInput();
 			}
 
 			if (doesExist(nbr)) {
@@ -134,7 +131,10 @@ public class BankApplication {
 			nbr2 = integerInput();
 			System.out.println("Belopp att överföra: ");
 			amount = doubleInput();
-
+			while (amount <= 0) {
+				System.out.println("Beloppet är negativt. Skriv in ett positivt belopp!");
+				amount = doubleInput();
+			}
 			if (doesExist(nbr1) && doesExist(nbr2)) {
 				if (bank.findByNumber(nbr1).getAmount() < amount) {
 					System.out.println("Överföringen misslyckades. Endast " + bank.findByNumber(nbr1).getAmount()
@@ -154,9 +154,7 @@ public class BankApplication {
 			break;
 		case 6: // skapa nytt konto
 			System.out.print("Namn på kontoinnehavare: ");
-			String name = "";
-			
-			name = stringInput();
+			String name = stringInput();
 			System.out.print("Personnummer: ");
 			long idNr = longInput();
 			System.out.println("Konto skapat. Kontonummer: " + bank.addAccount(name, idNr));
@@ -164,7 +162,6 @@ public class BankApplication {
 
 		case 7: // ta bort ett konto efter kundnummer
 			System.out.println("Vilket kundnummer ska tas bort? ");
-			nbr=0;
 			nbr = integerInput();
 			
 			if (bank.removeAccount(nbr)) {
@@ -182,7 +179,6 @@ public class BankApplication {
 			} else {
 				for (BankAccount account : accounts) {
 					System.out.println(account.toString());
-
 				}
 
 			}
