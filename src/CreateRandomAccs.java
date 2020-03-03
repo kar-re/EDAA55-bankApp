@@ -3,7 +3,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
+/**
+ * Skapar slumpmässiga konton med slumpmässiga namn Accounts hänvisar till
+ * listan som överskrivs med de nya kontona.
+ */
 public class CreateRandomAccs {
 	ArrayList<String> firstName, lastName, names;
 	ArrayList<Integer> id;
@@ -11,9 +14,9 @@ public class CreateRandomAccs {
 	Random rand;
 	int amount;
 
-	/*
-	 * Skapar slumpmässiga konton med slumpmässiga namn Accounts hänvisar till
-	 * listan som överskrivs med de nya kontona.
+	/**
+	 * @param amount mängden konton du vill skapa 
+	 * @param filename filen med namn du vill använda, filename skall vara formatterade förnamn efternamn ny rad.
 	 */
 	public CreateRandomAccs(int amount, String filename) {
 		names = new ArrayList<String>();
@@ -22,6 +25,7 @@ public class CreateRandomAccs {
 		createAccounts(filename, amount);
 		
 	}
+	
 	public int getAmount() {
 		return amount;
 	}

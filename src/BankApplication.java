@@ -14,12 +14,20 @@ public class BankApplication {
 	 * Mainmetod som anropar meny-loopen.
 	 */
 	public static void main(String[] args) {
+		/*
+		 * Skapar slumpmässiga konton från en lista med namn, för testsyften.
+		 */
 		CreateRandomAccs randomaccs = new CreateRandomAccs(10, "namn.txt");
 		for (int i = 0; i < randomaccs.getAmount(); i++) {
 			bank.addAccount(randomaccs.getNames().get(i), randomaccs.getYears().get(i));
 		}
 
 		BankApplication b = new BankApplication();
+		/*
+		 * Två booleans som kontrollerar applikationens menyloopen, och själva
+		 * applikationen i sig. boolb är den som kontrollerar applikationen, bool
+		 * menyloopen
+		 */
 		while (boolb) {
 			bool = true;
 			while (bool) {
@@ -32,9 +40,9 @@ public class BankApplication {
 
 	}
 
-	/*
-	 * Huvudmetod som går igenom menyn, och gör vad användaren vill. Bröt inte ut
-	 * några metoder pga
+	/**
+	 * Huvudmetod som går igenom menyn, och gör vad användaren vill.
+	 * 
 	 */
 	public void runApplication() {
 		int nbr;
@@ -43,6 +51,7 @@ public class BankApplication {
 		scan.nextLine();
 		System.out.println("Val: " + input);
 
+		// Switch case för val av meny
 		switch (input) {
 
 		case 1: // sök konto utifrån innehavare (antar idNr?)
@@ -57,7 +66,6 @@ public class BankApplication {
 					System.out.println(accs.toString());
 				}
 			}
-
 			break;
 
 		case 2: // sök kontoinnehavare efter (del av) namn
@@ -80,6 +88,7 @@ public class BankApplication {
 
 			System.out.println("Sätt in pengar till konto: ");
 			nbr = integerInput();
+
 			System.out.println("Belopp: ");
 			double dep = doubleInput();
 
@@ -87,6 +96,7 @@ public class BankApplication {
 				System.out.println("Du måste ange ett positivt belopp! Ange nytt belopp: ");
 				dep = scan.nextDouble();
 			}
+
 			if (doesExist(nbr)) {
 				bank.findByNumber(nbr).deposit(dep);
 				System.out.println("Saldo för konto " + nbr + ": " + bank.findByNumber(nbr).getAmount() + " kr");
@@ -125,15 +135,19 @@ public class BankApplication {
 			break;
 
 		case 5: // överföring
-			double amount=0;
+			double amount = 0;
 			int nbr1 = 0;
 			int nbr2 = 0;
+
 			System.out.println("Från konto: ");
 			nbr1 = integerInput();
+
 			System.out.println("Till konto: ");
 			nbr2 = integerInput();
+
 			System.out.println("Belopp att överföra: ");
 			amount = doubleInput();
+
 			while (amount <= 0) {
 				System.out.println("Beloppet är negativt. Skriv in ett positivt belopp!");
 				amount = doubleInput();
@@ -158,15 +172,17 @@ public class BankApplication {
 		case 6: // skapa nytt konto
 			System.out.print("Namn på kontoinnehavare: ");
 			String name = stringInput();
+
 			System.out.print("Personnummer: ");
 			long idNr = longInput();
+
 			System.out.println("Konto skapat. Kontonummer: " + bank.addAccount(name, idNr));
 			break;
 
 		case 7: // ta bort ett konto efter kundnummer
 			System.out.println("Vilket kundnummer ska tas bort? ");
 			nbr = integerInput();
-			
+
 			if (bank.removeAccount(nbr)) {
 				System.out.println("Kontot har tagits bort.");
 			} else {
@@ -176,30 +192,33 @@ public class BankApplication {
 
 		case 8: // skriv ut alla konton
 			ArrayList<BankAccount> accounts;
+
 			accounts = sortList(bank.getAllAccounts());
+
 			if (accounts.size() == 0) {
 				System.out.println("Det finns inga konton ännu");
 			} else {
 				for (BankAccount account : accounts) {
 					System.out.println(account.toString());
 				}
-
 			}
-
 			break;
 
 		case 9: // avsluta
 			boolb = false;
 			System.out.println("Session avslutas...");
 			break;
-		default:
+		default: // Om man skriver in ett ogiltigt menyval
 			System.out.println("Inget menyval med det numret. Testa något i listan istället!");
 			break;
 		}
 		bool = false;
 
 	}
-	
+
+	/**
+	 * Hjälpmetod för att sanera användarinput till giltigt int
+	 */
 	private int integerInput() {
 		while (!scan.hasNextInt()) {
 			scan.nextLine();
@@ -207,7 +226,10 @@ public class BankApplication {
 		}
 		return scan.nextInt();
 	}
-	
+
+	/**
+	 * Hjälpmetod för att sanera användarinput till giltig long
+	 */
 	private long longInput() {
 		while (!scan.hasNextLong()) {
 			scan.next();
@@ -215,7 +237,10 @@ public class BankApplication {
 		}
 		return scan.nextLong();
 	}
-	
+
+	/**
+	 * Hjälpmetod för att sanera användarinput till giltig double
+	 */
 	private double doubleInput() {
 		while (!scan.hasNextDouble()) {
 			System.out.println("Skriv in ett giltigt nummer");
@@ -223,7 +248,10 @@ public class BankApplication {
 		}
 		return scan.nextDouble();
 	}
-	
+
+	/**
+	 * Hjälpmetod för att sanera användarinput till giltig sträng
+	 */
 	private String stringInput() {
 		while (scan.hasNextInt() || scan.hasNextByte() || scan.hasNextLong() || scan.hasNextShort()) {
 			System.out.println("Skriv in en giltig sträng");
@@ -232,7 +260,16 @@ public class BankApplication {
 		return scan.nextLine();
 	}
 
-	public ArrayList<BankAccount> sortList(ArrayList<BankAccount> list) {
+	/**
+	 * Sorterar en ArrayList med BankAccount enligt bokstavsordning. Gör först en
+	 * kopia av listan som skickas in. Sorterar sedan enligt principen för varje i
+	 * kollar på den framför använder compareTo på getName, och om den första är
+	 * större, dvs har ett senare namn så byter den plats på dem.
+	 * 
+	 * @return den sorterade listan.
+	 * @param list Lista som skall sorteras.
+	 */
+	private ArrayList<BankAccount> sortList(ArrayList<BankAccount> list) {
 		ArrayList<BankAccount> sortedAcc = new ArrayList<BankAccount>(list);
 		BankAccount tempAcc;
 
@@ -249,15 +286,20 @@ public class BankApplication {
 		return sortedAcc;
 	}
 
-	public boolean doesExist(int nbr) {
-		boolean b = true;
+	/**
+	 * Kollar om ett bankkonto med ett visst nummer existerar.
+	 * 
+	 * @param nbr bankkontot som skall kollas
+	 * @return true om det gör det, annars false.
+	 */
 
-		if (bank.findByNumber(nbr) == null) {
-			b = false;
-		}
-		return b;
+	private boolean doesExist(int nbr) {
+		return bank.findByNumber(nbr) != null ? true : false;
 	}
 
+	/**
+	 * Skriver ut menyn
+	 */
 	private void writeMenu() {
 
 		System.out.println(" ");
@@ -274,6 +316,11 @@ public class BankApplication {
 
 	}
 
+	/**
+	 * Skapar en delay i applikationen genom thread.sleep
+	 * 
+	 * @param ms hur länge applikationen skall dröja, i millisekunder
+	 */
 	static void delay(int ms) {
 		try {
 			Thread.sleep(ms);
