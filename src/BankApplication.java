@@ -17,10 +17,10 @@ public class BankApplication {
 		/*
 		 * Skapar slumpmässiga konton från en lista med namn, för testsyften.
 		 */
-		CreateRandomAccs randomaccs = new CreateRandomAccs(10, "namn.txt");
-		for (int i = 0; i < randomaccs.getAmount(); i++) {
-			bank.addAccount(randomaccs.getNames().get(i), randomaccs.getYears().get(i));
-		}
+//		CreateRandomAccs randomaccs = new CreateRandomAccs(10, "namn.txt");
+//		for (int i = 0; i < randomaccs.getAmount(); i++) {
+//			bank.addAccount(randomaccs.getNames().get(i), randomaccs.getYears().get(i));
+//		}
 
 		BankApplication b = new BankApplication();
 		/*
